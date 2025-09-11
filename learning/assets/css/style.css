@@ -24,7 +24,7 @@
     width: 400px;
     height: 400px;
     position: absolute;
-    
+
 }
 
 .box2 {
@@ -41,4 +41,26 @@
     position: absolute;
     right: 100px;
     left: 100px;
+}
+
+.p-heart {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: solid 2px goldenrod;
+
+    right: 0px;
+    
+
+}
+
+.p-img {
+    display: block;
+    width: 100%;
+}
+
+.main{
+    position: relative;
+    background-color: blue;
+    width: 450px;
 }
