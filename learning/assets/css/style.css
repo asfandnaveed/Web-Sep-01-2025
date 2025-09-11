@@ -1,0 +1,42 @@
+.heading {
+    color: rebeccapurple;
+    font-size: 55px;
+    background-color: aqua;
+    margin-left: 20px;
+
+}
+
+.heading2 {
+    color: rebeccapurple;
+    font-size: 55px;
+    background-color: lightskyblue;
+    padding-bottom: 20px;
+}
+
+.tbl,
+.tbl td,
+.tbl th {
+    border: solid 3px gray;
+}
+
+.box1 {
+    background-color: rebeccapurple;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    
+}
+
+.box2 {
+    background-color: green;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+}
+
+.box3 {
+    background-color: goldenrod;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+}
