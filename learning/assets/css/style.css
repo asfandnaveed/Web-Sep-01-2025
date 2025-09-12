@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Sansita";
+    src: url("../fonts/SansitaSwashed-Regular.ttf");
+}
+
 .heading {
     color: rebeccapurple;
     font-size: 55px;
@@ -76,4 +81,10 @@
 body{
     margin: 0px;
     padding: 0px;
+}
+
+.h-heading{
+    color: white;
+    font-size: 60px;
+    font-family: "Sansita";
 }
