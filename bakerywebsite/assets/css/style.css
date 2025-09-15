@@ -1,0 +1,13 @@
+.bg-h-img{
+    background-image: url("../images/header_background.png");
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+}
+
+.h-heading{
+    font-family: "Sansita Swashed";
+    font-size: 4rem;
+    color: white;
+    font-weight: 400;
+}
