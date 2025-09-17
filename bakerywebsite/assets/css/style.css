@@ -48,5 +48,10 @@
     font-size: 3rem;
     font-family: "Sansita Swashed";
     font-weight: 600;
-    
+
+}
+
+.bg-product{
+    background-image: url("../images/product/product_background.png");
+    background-size: cover;
 }
