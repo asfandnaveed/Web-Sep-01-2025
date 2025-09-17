@@ -1,11 +1,20 @@
 :root{
     --bs-primary:#933C24;
+    --bs-primary-hover:#a74a31;
+    --bs-secondary:#E9BD8C;
+    
 }
 
 
 .btn-primary{
     background-color:var(--bs-primary) !important;
     border-color: var(--bs-primary) !important;
+    font-family: "Inter";
+}
+
+.btn-primary:hover{
+    background-color: var(--bs-primary-hover) !important;
+    border-color: var(--bs-primary-hover) !important;
 }
 
 .bg-h-img{
@@ -24,8 +33,20 @@
 }
 
 .h-subheading{
-    color: #E9BD8C;
+    color: var(--bs-secondary);
     font-family: "Inter";
     font-size: 1.2rem;
+    
+}
+
+.h-learnmore{
+    color: var(--bs-secondary);
+    text-decoration: none;
+}
+
+.top-product-heading{
+    font-size: 3rem;
+    font-family: "Sansita Swashed";
+    font-weight: 600;
     
 }
