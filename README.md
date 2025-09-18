@@ -5,3 +5,7 @@ Web-Sep-01-2025
 ______________________________________
 # Bakery Website Figma Design
 https://www.figma.com/design/sC4umT33PwTHpj5vJNJ1qj/Bakery-Website-Ui?node-id=0-1&p=f&t=vGtpHzyILgru4uel-0
+
+______________________________________
+# Village Chef Website Figma Design
+https://www.figma.com/design/5iAYzUUoSuHFKTxQnbvwQt/Food-Website-UI--Community---Copy-?node-id=5-2&t=4ZtU50fQMIWDw8wB-0
