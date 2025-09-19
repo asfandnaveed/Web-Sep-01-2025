@@ -1,0 +1,14 @@
+.bg-img {
+    background-color: #181818;
+    height: 100vh;
+}
+.sectionText{
+    font-family: "Contrail One";
+    font-size: 4rem;
+    color: white;
+}
+
+.section-subheading{
+    color: white;
+    font-family: "Poppins";
+}
