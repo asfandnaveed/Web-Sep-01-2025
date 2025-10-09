@@ -11,7 +11,7 @@ function News() {
     useEffect(() => {
         try {
 
-            fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=9480aea0168c42e886a4cd472701c4b7')
+            fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=API')
                 .then(res => res.json())
                 .then(news => {
                     setData(news);
