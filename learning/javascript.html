@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button> Previous Image</button>
+
+    <img id="chg-img" src="assets/images/food.webp" alt="">
+
+    <button onclick="nextImage();"> Next Image</button>
+
+    <h1  id="heading">Hello Students</h1>
+
+    <button onclick="event1();">Click Me</button>
+    
+    
+    <script>
+
+        function event1 (){
+            document.getElementById('heading').innerHTML = 'Text Changed!';
+            document.getElementById('heading').style.color = 'green';
+            document.getElementById('heading').style.fontSize = '3rem';
+        }
+
+        function nextImage (){
+            document.getElementById('chg-img').src = "assets/images/header.png";
+        }
+
+        
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="card mx-auto" style="width: 23rem;">
+        <div class="card-body">
+            <div class="card-title">Enter Your Age</div>
+            <input id="age-inp" type="number" class="form-control" placeholder="Enter Age">
+            <button onclick="checkAge();" class="btn btn-warning mt-3">Submit</button>
+
+            <div id="message"></div>
+        </div>
+    </div>
+
+
+
+
+    <div id="food" class="h3"></div>
+    <button class="btn btn-warning" onclick="event1();">Show Menu</button>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    
+    <script>
+        function checkAge(){
+
+            var age = document.getElementById('age-inp').value;
+            console.log(age);
+
+            if(age < 40){
+                document.getElementById('message').innerHTML = "<div class='alert age<40? alert-success :alert-danger'>You are age<40 ? Young : Old!</div>";
+            }else{
+                document.getElementById('message').innerHTML = "<div class='alert alert-danger'>You are Old!</div>";
+            }
+        }
+
+        function event1(){
+            var items = ["Pizza" , "Pasta" , "lasagna" ,"Paratha" , "Sushi"];
+
+            var menu = items.map(food => `<div>${food}</div>`);
+
+            // for(var i = 0; i< items.length; i++){
+
+            //     document.getElementById('food').innerHTML += `<div>${items[i]}</div>`;
+            // }
+
+            document.getElementById('food').innerHTML = menu;
+
+        }
+    </script>
+</body>
+
+</html>
