@@ -1,0 +1,31 @@
+// const express = require('express');
+import express from 'express';
+import cors from 'cors';
+// const database = require('mysql2');
+
+import userRoute from './routes/userRoute.js';
+import productRoute from './routes/productRoute.js';
+import adminRoute from './routes/adminRoute.js';
+
+const app = express();
+
+app.use(express.json());
+app.use(cors());
+
+
+app.use('/api/user' ,userRoute);
+
+
+app.use('/api/products', productRoute);
+
+app.use('/api/admin' , adminRoute);
+
+
+
+
+
+
+
+
+
+app.listen(5001, console.log('Server is Running !!'));
