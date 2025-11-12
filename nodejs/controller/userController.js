@@ -1,4 +1,5 @@
 import db from '../config/database.js'
+import jwt from 'jsonwebtoken';
 
 
 
@@ -37,9 +38,21 @@ export const userLogin = (req , res)=>{
     db.query(query ,[email , pass] , (err , result)=>{
 
         if(result.length > 0){
+
+            const token = jwt.sign(
+                {
+                    id:result[0].id,
+                    email:result[0].email
+                },
+                'json_web_cyber1341pulse_1414_token',
+                {
+                    expiresIn:'10h'
+                });
+
             res.json({
                 status:true,
                 message: "User Logged In",
+                token:token,
                 user:result[0],
             });
         }

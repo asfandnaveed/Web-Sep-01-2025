@@ -6,6 +6,7 @@ import cors from 'cors';
 import userRoute from './routes/userRoute.js';
 import productRoute from './routes/productRoute.js';
 import adminRoute from './routes/adminRoute.js';
+import cartRoute from './routes/cartRoute.js';
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.use('/api/user' ,userRoute);
 app.use('/api/products', productRoute);
 
 app.use('/api/admin' , adminRoute);
+
+app.use('/api/cart' , cartRoute);
 
 
 
