@@ -28,3 +28,19 @@ export const addToCart = (req , res)=>{
 
      });
 }
+
+
+
+export  const getCartItems = (req ,res)=>{
+
+    const userId = req.user.id;
+
+
+    const query = `SELECT c.product_id , c.quantity , p.name ,p.price , p.stock , p.image_url 
+    FROM cart c INNER JOIN products p ON c.product_id = p.id 
+    WHERE c.user_id= ?`;
+
+
+    
+    
+}

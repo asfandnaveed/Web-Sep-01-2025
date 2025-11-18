@@ -53,3 +53,12 @@ export const addProduct = (req, res) => {
 
     });
 };
+
+
+export const updateImage = (req ,res)=>{
+
+    const {productId} = req.body;
+
+    const query = "UPDATE products SET image_url = ? WHERE id = ?";
+
+}
