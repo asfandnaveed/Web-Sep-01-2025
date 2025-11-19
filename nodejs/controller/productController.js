@@ -59,6 +59,23 @@ export const updateImage = (req ,res)=>{
 
     const {productId} = req.body;
 
+    const image ='uploads/products/'+ req.file.filename;
+
     const query = "UPDATE products SET image_url = ? WHERE id = ?";
+
+    db.query(query , [image , productId] , (err , result)=>{
+
+
+        if(err){
+            console.log(err);
+        }else{
+
+            res.json({
+                status:true,
+                message:"Image Uploaded !",
+            });
+
+        }
+    })
 
 }
