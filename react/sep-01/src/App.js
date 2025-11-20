@@ -7,15 +7,16 @@ import Product from './pages/Product';
 import ProductDetail from './pages/ProductDetail';
 import Navbar from './components/navbar/Navbar';
 import AdminLogin from './pages/Admin/Login';
+import FirebaseRegister from './pages/Firebase/FirebaseRegister';
 
 function App() {
   return (
     <div>
       <Router>
-        <Navbar/>
+        {/* <Navbar/> */}
         <Routes>
 
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<FirebaseRegister />} />
           <Route path='/about' element={ <About />} />
           <Route path='/product' element={ <Product />} />
           <Route path='/product/detail' element={ <ProductDetail />} />

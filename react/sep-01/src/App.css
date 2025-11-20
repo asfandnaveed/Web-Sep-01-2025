@@ -87,3 +87,35 @@ body{
   box-shadow: 0 0 5px rgba(102, 16, 242, 0.3);
 }
 
+
+/* FIREBASE REGISTER */
+
+.custom-input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  transition: 0.3s ease;
+}
+
+.custom-input:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 4px rgba(13, 110, 253, 0.4);
+}
+
+.login-btn {
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #0b5ed7;
+}
+
+.card {
+  background: #ffffff;
+}
+
+body {
+  background: linear-gradient(135deg, #e3f2fd, #ffffff);
+}
+
