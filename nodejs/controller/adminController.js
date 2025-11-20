@@ -23,7 +23,7 @@ export const adminLogin = (req , res)=>{
                     id:result[0].id,
                     email:result[0].email
                 } ,
-                'json_web_cyber1341pulse_1414_token' ,
+                process.env.JSONTOKEN,
                 {
                     expiresIn:'1h'
                 }

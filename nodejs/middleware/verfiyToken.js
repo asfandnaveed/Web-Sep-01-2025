@@ -17,7 +17,7 @@ function verifyToken (req ,res , next){
 
     try{
 
-        const data = jwt.verify(token , 'json_web_cyber1341pulse_1414_token' );
+        const data = jwt.verify(token , process.env.JSONTOKEN );
 
         req.user = data;
         next();

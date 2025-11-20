@@ -1,6 +1,8 @@
 // const express = require('express');
 import express from 'express';
 import cors from 'cors';
+
+import 'dotenv/config';
 // const database = require('mysql2');
 
 import userRoute from './routes/userRoute.js';
@@ -31,4 +33,4 @@ app.use('/api/cart' , cartRoute);
 
 
 
-app.listen(5001, console.log('Server is Running !!'));
+app.listen(process.env.PORT || 5000, console.log('Server is Running !!'));
