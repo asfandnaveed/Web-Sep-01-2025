@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import '../../App.css'
-import { push, ref, set } from 'firebase/database';
+import { onValue, push, ref, serverTimestamp, set } from 'firebase/database';
 import { auth, db } from '../../Firebase';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 
 function FirebaseChat() {
 
-    const [chatMessage, setChatMessage] = useState();
+    const [chatMessage, setChatMessage] = useState("");
+    const [messages , setMessages] = useState([]);
 
 
     const [user, setUser] = useState(null);
@@ -27,12 +28,42 @@ function FirebaseChat() {
     }, []);
 
 
+    useEffect(()=>{
+
+        const node = ref(db , 'Messages');
+
+        onValue(node , (snapshot)=>{
+
+            const data = snapshot.val();
+
+            const messageList = Object.keys(data).map((key)=>({
+                key:key,
+                ...data[key]
+            }));
+
+            setMessages(messageList);
+        });
+
+
+    } , []);
+
+
     const sendMessage = () => {
 
         const node = ref(db, 'Messages');
 
+
+        if(chatMessage==""){
+            return;
+        }
+
         push(node, {
+            id: user.uid,
+            email:user.email,
             chat: chatMessage,
+            time:serverTimestamp(),
+        }).then(()=>{
+            setChatMessage("");
         });
 
     };
