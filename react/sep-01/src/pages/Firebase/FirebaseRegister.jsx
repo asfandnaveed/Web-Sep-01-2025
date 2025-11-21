@@ -1,14 +1,16 @@
 
 import { useState } from 'react';
 import '../../App.css';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../Firebase';
+import { useNavigate } from 'react-router-dom';
 
 
 function FirebaseRegister() {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const navigate = useNavigate();
 
 
     const userRegister =async (e)=>{
@@ -19,6 +21,9 @@ function FirebaseRegister() {
 
             const result = await createUserWithEmailAndPassword(auth, email , password);
 
+            onAuthStateChanged(auth , ()=>{
+                navigate('/chat');
+            });
             
         }catch(err){
             console.log(err)
