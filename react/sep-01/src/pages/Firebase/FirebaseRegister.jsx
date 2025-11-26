@@ -76,7 +76,7 @@ function FirebaseRegister() {
                 </form>
 
                 <p className="text-center mt-3 small">
-                    Don’t have an account? <a href="#" className="fw-semibold text-decoration-none">Sign Up</a>
+                    Already have an account ? <a href="/login" className="fw-semibold text-decoration-none">Sign In</a>
                 </p>
             </div>
         </div>

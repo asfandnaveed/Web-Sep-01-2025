@@ -18,8 +18,9 @@ function App() {
         {/* <Navbar/> */}
         <Routes>
 
-          <Route path='/' element={<FirebaseRegister />} />
-          <Route path="/login" element={<FirebaseLogin />} />
+          <Route path='/' element={<FirebaseLogin />} />
+          <Route path='/login' element={<FirebaseLogin />} />
+          <Route path="/register" element={<FirebaseRegister />} />
           <Route path='/chat' element={<FirebaseChat />} />
           <Route path='/about' element={ <About />} />
           <Route path='/product' element={ <Product />} />

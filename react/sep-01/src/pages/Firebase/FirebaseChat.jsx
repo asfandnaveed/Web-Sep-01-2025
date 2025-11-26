@@ -1,20 +1,43 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import '../../App.css'
-import { onValue, push, ref, serverTimestamp, set } from 'firebase/database';
+import { onValue, push, ref, serverTimestamp } from 'firebase/database';
 import { auth, db } from '../../Firebase';
 import { useNavigate } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 function FirebaseChat() {
 
     const [chatMessage, setChatMessage] = useState("");
-    const [messages , setMessages] = useState([]);
-
-
+    const [messages, setMessages] = useState([]);
     const [user, setUser] = useState(null);
+
+    const messagesEndRef = useRef(null);
+
+
     const navigate = useNavigate();
 
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
+
+    // Convert timestamp to readable time
+    const formatTime = (ts) => {
+        if (!ts) return "";
+        return new Date(ts).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+        });
+    };
+
+    // Extract username from email
+    const getNameFromEmail = (email) => {
+        if (!email) return "";
+        return email.split("@")[0];
+    };
+
+    // Authentication check
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if (!currentUser) {
@@ -24,48 +47,50 @@ function FirebaseChat() {
             }
         });
 
+        return () => unsubscribe();
+    }, [navigate]);
 
-    }, []);
+    // Load messages
+    useEffect(() => {
+        const node = ref(db, 'Messages');
 
+        onValue(node, (snapshot) => {
+            const data = snapshot.val() || {};
 
-    useEffect(()=>{
-
-        const node = ref(db , 'Messages');
-
-        onValue(node , (snapshot)=>{
-
-            const data = snapshot.val();
-
-            const messageList = Object.keys(data).map((key)=>({
-                key:key,
+            const messageList = Object.keys(data).map((key) => ({
+                key: key,
                 ...data[key]
             }));
 
             setMessages(messageList);
         });
+    }, []);
 
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
-    } , []);
-
-
+    // Send message
     const sendMessage = () => {
+        if (chatMessage.trim() === "") return;
 
         const node = ref(db, 'Messages');
 
-
-        if(chatMessage==""){
-            return;
-        }
-
         push(node, {
             id: user.uid,
-            email:user.email,
+            email: user.email,
             chat: chatMessage,
-            time:serverTimestamp(),
-        }).then(()=>{
+            time: Date.now() // store readable timestamp
+        }).then(() => {
             setChatMessage("");
         });
+    };
 
+    // Logout function
+    const logoutUser = () => {
+        signOut(auth)
+            .then(() => navigate("/login"))
+            .catch((err) => console.log(err));
     };
 
     return (
@@ -74,15 +99,18 @@ function FirebaseChat() {
             {/* Top Navbar */}
             <div className="top-navbar d-flex justify-content-between align-items-center px-4 py-3">
                 <div className="d-flex align-items-center">
-                    <img src="https://cdn-icons-png.flaticon.com/512/906/906349.png" className="logo-img me-3" />
+                    <img src="https://cdn-icons-png.flaticon.com/512/906/906349.png" className="logo-img me-3" alt="" />
                     <h5 className="fw-bold mb-0">Inbox</h5>
                 </div>
 
                 <div className="d-flex align-items-center">
-                    <button className="btn btn-success btn-sm me-3">Import Contacts</button>
+                    <button className="btn btn-outline-danger btn-sm me-3" onClick={logoutUser}>
+                        Logout
+                    </button>
+
                     <div className="user-profile d-flex align-items-center">
-                        <img src="https://i.pravatar.cc/150?img=32" className="avatar-sm me-2" />
-                        <span className="fw-semibold">Jane Doe</span>
+                        <img src="https://i.pravatar.cc/150?img=32" className="avatar-sm me-2" alt="" />
+                        <span className="fw-semibold">{user ? getNameFromEmail(user.email) : "User"}</span>
                     </div>
                 </div>
             </div>
@@ -106,7 +134,7 @@ function FirebaseChat() {
                     <div className="chat-list">
 
                         <div className="chat-item active">
-                            <img src="https://i.pravatar.cc/150?img=3" className="avatar-sm" />
+                            <img src="https://i.pravatar.cc/150?img=3" className="avatar-sm" alt="" />
                             <div className="ms-2">
                                 <h6 className="mb-0 fw-semibold">Alex Johnson</h6>
                                 <small>Product Manager</small>
@@ -115,7 +143,7 @@ function FirebaseChat() {
                         </div>
 
                         <div className="chat-item">
-                            <img src="https://i.pravatar.cc/150?img=12" className="avatar-sm" />
+                            <img src="https://i.pravatar.cc/150?img=12" className="avatar-sm" alt="" />
                             <div className="ms-2">
                                 <h6 className="mb-0">John Mayer</h6>
                                 <small>How are you?</small>
@@ -124,7 +152,7 @@ function FirebaseChat() {
                         </div>
 
                         <div className="chat-item">
-                            <img src="https://i.pravatar.cc/150?img=21" className="avatar-sm" />
+                            <img src="https://i.pravatar.cc/150?img=21" className="avatar-sm" alt="" />
                             <div className="ms-2">
                                 <h6 className="mb-0">Carole Landu</h6>
                                 <small>I agree, let's proceed...</small>
@@ -139,7 +167,7 @@ function FirebaseChat() {
                 <div className="chat-area d-flex flex-column">
 
                     <div className="chat-header px-4 py-3 d-flex align-items-center border-bottom">
-                        <img src="https://i.pravatar.cc/150?img=3" className="avatar-sm" />
+                        <img src="https://i.pravatar.cc/150?img=3" className="avatar-sm" alt="" />
                         <div className="ms-2">
                             <h6 className="fw-bold mb-0">Alex Johnson</h6>
                             <small className="text-success">Online</small>
@@ -149,25 +177,19 @@ function FirebaseChat() {
                     {/* Messages */}
                     <div className="messages flex-grow-1 p-4">
 
-                        <div className="message incoming">
-                            <p>I will get back to you shortly.</p>
-                            <small>Sent at 16:41</small>
-                        </div>
+                        {messages.map((message) => (
+                            <div
+                                key={message.key}
+                                className={`message ${message.id === user?.uid ? "outgoing" : "incoming"}`}
+                            >
+                                <strong className='text-dark'>{getNameFromEmail(message.email)}</strong>
+                                <p>{message.chat}</p>
 
-                        <div className="message outgoing">
-                            <p>Great, thank you! Looking forward to your update.</p>
-                            <small>Seen at 16:59</small>
-                        </div>
+                                <small>{formatTime(message.time)}</small>
+                            </div>
+                        ))}
 
-                        <div className="message incoming">
-                            <p>The contract signing is confirmed for Friday at 4 PM.</p>
-                            <small>Sent at 9:12</small>
-                        </div>
-
-                        <div className="message outgoing">
-                            <p>Perfect! Have a great day.</p>
-                            <small>Seen at 9:26</small>
-                        </div>
+                        <div ref={messagesEndRef}></div>
 
                     </div>
 
@@ -177,16 +199,14 @@ function FirebaseChat() {
                             <input
                                 className="form-control message-box-input"
                                 placeholder="Type a message..."
-                                onChange={(e) => (setChatMessage(e.target.value))}
+                                onChange={(e) => setChatMessage(e.target.value)}
                                 value={chatMessage}
                             />
 
                             <div className="actions d-flex align-items-center">
                                 <button className="action-btn"><i className="bi bi-paperclip"></i></button>
                                 <button className="action-btn"><i className="bi bi-emoji-smile"></i></button>
-                                <button className="btn btn-primary send-btn px-4"
-                                    onClick={sendMessage}
-                                >
+                                <button className="btn btn-primary send-btn px-4" onClick={sendMessage}>
                                     Send
                                 </button>
                             </div>
@@ -198,8 +218,6 @@ function FirebaseChat() {
             </div>
 
         </div>
-
-
     );
 }
 
