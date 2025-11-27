@@ -9,6 +9,8 @@ import userRoute from './routes/userRoute.js';
 import productRoute from './routes/productRoute.js';
 import adminRoute from './routes/adminRoute.js';
 import cartRoute from './routes/cartRoute.js';
+import paymentRoute from './routes/paymentRoute.js';
+
 
 const app = express();
 
@@ -24,6 +26,8 @@ app.use('/api/products', productRoute);
 app.use('/api/admin' , adminRoute);
 
 app.use('/api/cart' , cartRoute);
+
+app.use('/api/payment' , paymentRoute);
 
 
 

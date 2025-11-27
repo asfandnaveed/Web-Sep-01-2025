@@ -10,6 +10,7 @@ import AdminLogin from './pages/Admin/Login';
 import FirebaseRegister from './pages/Firebase/FirebaseRegister';
 import FirebaseChat from './pages/Firebase/FirebaseChat';
 import FirebaseLogin from './pages/Firebase/FirebaseLogin';
+import Payment from './pages/Payment';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         {/* <Navbar/> */}
         <Routes>
 
-          <Route path='/' element={<FirebaseLogin />} />
+          <Route path='/' element={<Payment />} />
           <Route path='/login' element={<FirebaseLogin />} />
           <Route path="/register" element={<FirebaseRegister />} />
           <Route path='/chat' element={<FirebaseChat />} />
